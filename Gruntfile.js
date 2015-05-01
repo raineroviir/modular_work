@@ -1,7 +1,12 @@
 'use strict';
 
 module.exports = function(grunt) {
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.registerTask('test', ['jshint:dev', 'simplemocha:devorallorunicorns']);
+	grunt.registerTask('default', ['test']);
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+
 	grunt.initConfig({
 		jshint: {
 			dev: {
@@ -27,7 +32,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 		  scripts: {
-		    files: ['Gruntfile.js', 'gree*.js', 'test/*.js'],
+		    files: ['Gruntfile.js', 'reader*.js', 'test/*.js'],
 		    tasks: ['test'],
 		    options: {
 		    },
@@ -38,8 +43,5 @@ module.exports = function(grunt) {
 grunt.event.on('watch', function(action, filepath, target) {
   grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
 });
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-simple-mocha');
-	grunt.registerTask('test', ['jshint:dev', 'simplemocha:devorallorunicorns']);
-	grunt.registerTask('default', ['test']);
+
 };
